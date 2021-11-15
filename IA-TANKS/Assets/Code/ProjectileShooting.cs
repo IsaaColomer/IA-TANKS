@@ -10,7 +10,6 @@ public class ProjectileShooting : MonoBehaviour
     public GameObject bulletPrefab;
     public float time;
     public float v;
-    public float angle;
     public GameObject bulletHolder;
     public void Start()
     {
