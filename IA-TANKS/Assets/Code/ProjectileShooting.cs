@@ -1,39 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.
 
 public class ProjectileShooting : MonoBehaviour
 {
-    public Transform enemy;
-    private Transform firePoint;
-    private Vector2 acceleration;
-    private Vector2 velocity;
-    private Vector2 initialVelocity;
-    [SerializeField]private float gravity;
-    [SerializeField] private float angle;
-    // Start is called before the first frame update
-    void Start()
+    public static ProjectileShooting instace;
+    public GameObject enemy;
+    public GameObject spawnPosition;
+    public GameObject bulletPrefab;
+    public float time;
+    public float v;
+    public float angle;
+    public GameObject bulletHolder;
+    public void Start()
     {
-        firePoint = GameObject.FindGameObjectWithTag("FirePoint").transform;
-        gravity = -9.8f;
-        velocity = Vector2.zero;
-        initialVelocity = Vector2.zero;
+        instace = this;
+        time = 0;
     }
-
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
-    }
-    private void FixedUpdate()
-    {
-        acceleration.x = 0;
-        acceleration.y = gravity;
-    }
-    void CalculateVelocity()
-    {
-        velocity.x = initialVelocity.x * Mathf.Cos(angle);
-        velocity.y = ((initialVelocity.y * Mathf.Sin(angle))-gravity*Time.deltaTime);
+        if(time <2)
+        {
+            time += Time.deltaTime;
+        }
+        if(time >2)
+        {
+            Instantiate(bulletPrefab, spawnPosition.transform.position, Quaternion.identity, bulletHolder.transform);
+            time = 0;
+        }
     }
 }
