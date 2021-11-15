@@ -34,12 +34,10 @@ public class RedTankMovement : MonoBehaviour
         NavMeshHit hit;
         if (NavMesh.SamplePosition(worldTarget, out hit, 1.0f, NavMesh.GetAreaFromName("Not Walkable")))
         {
-            Debug.Log("In");
             agent.destination = worldTarget;
         }
         else
         {
-            Debug.Log("Out");
             agent.destination = -worldTarget;
         }
 
