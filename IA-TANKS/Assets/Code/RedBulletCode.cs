@@ -49,10 +49,14 @@ public class RedBulletCode : MonoBehaviour
 
         angle = ((Mathf.Pow(asda.instance.v, 2)) - (Mathf.Sqrt(square) / (Physics.gravity.y * targetX)));
 
-        float finalAngle = Mathf.Tan(angle * Mathf.Deg2Rad);
+        Debug.Log(angle);
+
+        float finalAngle = (angle * Mathf.Deg2Rad);
 
         float Vz = Mathf.Sqrt(Physics.gravity.y *(Mathf.Pow(distance,2)) / (2.0f * (targetY - (distance * finalAngle))));
         float Vy = finalAngle * Vz;
+
+        //float Vz = velocity * Mathf.Sin();
 
         Vector3 localVelocity = new Vector3(0f, Vy, Vz);
         Vector3 globalVelocity = transform.TransformDirection(localVelocity);

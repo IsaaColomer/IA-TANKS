@@ -31,31 +31,36 @@ public class BlueBullet : MonoBehaviour
     }
     void Launch()
     {
-        Vector3 projectileXZPos = new Vector3(BlueTankBullet.instace.spawnPositionBlue.transform.position.x, 0.0f, BlueTankBullet.instace.spawnPositionBlue.transform.position.z);
-        targetXZPos = new Vector3(redTank.position.x, 0.0f, redTank.position.z);
-        velocity = 50f;
-        arrel = (Mathf.Sqrt((Mathf.Pow(velocity, 4) - (Physics.gravity.y * ((Physics.gravity.y * Mathf.Pow(redTank.position.z, 2)) + (2 * redTank.position.y * Mathf.Pow(velocity, 2)))))));
-        if (arrel < 0)
-        {
-            arrel = -arrel;
-            angle = Mathf.Atan((Mathf.Pow(velocity, 2) + arrel) / (Physics.gravity.y * redTank.position.z));
-        }
-        else
-        {
-            angle = Mathf.Atan((Mathf.Pow(velocity, 2) + arrel) / (Physics.gravity.y * redTank.position.z));
-        }
-        float R = Vector3.Distance(projectileXZPos, targetXZPos);
-        float G = Physics.gravity.y;
-        
-        float tanAlpha = Mathf.Tan(angle * Mathf.Rad2Deg);
-        float H = redTank.position.y - BlueTankBullet.instace.spawnPositionBlue.transform.position.y;
+        float targetX = (redTank.position.x - transform.position.x);
+        float targetZ = (redTank.position.z - transform.position.z);
+        float targetY = (redTank.position.y - transform.position.y);
 
-        float Vz = Mathf.Sqrt(G * R * R / (2.0f * (H - (R * tanAlpha))));
-        float Vy = tanAlpha * Vz;
+        float distance = Vector3.Distance(redTank.position, transform.position);
+
+        float xAng = Mathf.Sqrt(Mathf.Pow(targetX, 2) + Mathf.Pow(targetZ, 2));
+
+        float square = (Mathf.Pow(asda.instance.v, 4)) - (Physics.gravity.y * (Physics.gravity.y * (Mathf.Pow(targetX, 2) + 2 * targetY * Mathf.Pow(asda.instance.v, 2))));
+
+        if (square < 0)
+        {
+            Debug.Log("Not enough range");
+        }
+
+        angle = ((Mathf.Pow(asda.instance.v, 2)) - (Mathf.Sqrt(square) / (Physics.gravity.y * targetX)));
+
+        Debug.Log(angle);
+
+        float finalAngle = (angle * Mathf.Deg2Rad);
+
+        float Vz = Mathf.Sqrt(Physics.gravity.y * (Mathf.Pow(distance, 2)) / (2.0f * (targetY - (distance * finalAngle))));
+        float Vy = finalAngle * Vz;
+
+        //float Vz = velocity * Mathf.Sin();
 
         Vector3 localVelocity = new Vector3(0f, Vy, Vz);
         Vector3 globalVelocity = transform.TransformDirection(localVelocity);
 
+        // launch the object by setting its initial velocity and flipping its state
         rb.velocity = globalVelocity;
     }
 }
