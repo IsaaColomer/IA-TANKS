@@ -21,7 +21,6 @@ public class CreateRaycast : MonoBehaviour
         {
             if (hit.transform.tag == "Red")
             {
-                Debug.Log("Red seen");
                 lr.SetPosition(0, firePoint.transform.position);
                 lr.SetPosition(1, hit.transform.position);
 
