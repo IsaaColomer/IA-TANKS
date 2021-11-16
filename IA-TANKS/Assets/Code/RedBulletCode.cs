@@ -32,45 +32,33 @@ public class RedBulletCode : MonoBehaviour
     }
     void Launch()
     {
-        Vector3 projectileXZPos = new Vector3(RedTankSpawnBullets.instace.spawnPositionRed.transform.position.x, transform.position.y, RedTankSpawnBullets.instace.spawnPositionRed.transform.position.z);
-        Vector3 dirVec = blueTank.position - transform.position;
-        targetXZPos = new Vector3(blueTank.position.x, transform.position.y, blueTank.position.z);
-        float  distance2 = blueTank.position.z - transform.position.z;
-        Debug.Log(targetXZPos);
-        velocity = 50f;
-        Debug.Log("((//((/(()");
-        arrel = Mathf.Sqrt((Mathf.Pow(velocity, 4) - (Physics.gravity.y * ((Physics.gravity.y * Mathf.Pow(blueTank.position.z, 2)) + (2 * blueTank.position.y * Mathf.Pow(velocity, 2))))));
-        Debug.Log("Arrel");
-        Debug.Log(arrel);
-        if (arrel < 0)
-        {
-            arrel = -arrel;
-            angle = Mathf.Atan((Mathf.Pow(velocity, 2) + arrel) / (Physics.gravity.y * blueTank.position.z));
-            Debug.Log("a");
-        }
-        else
-        {
-            angle = Mathf.Atan((Mathf.Pow(velocity, 2) + arrel) / (Physics.gravity.y * blueTank.position.z));
-            Debug.Log("b");
-        }
-        //float theta = 0.5f * Mathf.Asin((gravity * distance) / (projectileSpeed * projectileSpeed));
-        angle = 0.5f * Mathf.Asin((Physics.gravity.y * distance2) / (velocity * velocity));
-        Debug.Log("Angle");
-        Debug.Log(angle);
-        float R = Vector3.Distance(projectileXZPos, targetXZPos);
-        float G = Physics.gravity.y;
-        float tanAlpha = (angle * Mathf.Deg2Rad);
-        float H = blueTank.position.y - RedTankSpawnBullets.instace.spawnPositionRed.transform.position.y;
-        Vector3 releaseVector = (Quaternion.AngleAxis(tanAlpha, -Vector3.forward) * dirVec).normalized;
-        float Vz = Mathf.Sqrt((G * R * R) / (2.0f * (H - (R * tanAlpha))));
-        float Vy = tanAlpha * Vz;
+        float targetX = (blueTank.position.x-transform.position.x);
+        float targetZ = (blueTank.position.z-transform.position.z);
+        float targetY = (blueTank.position.y-transform.position.y);
 
+        float distance = Vector3.Distance(blueTank.position, transform.position);
 
+        float xAng = Mathf.Sqrt(Mathf.Pow(targetX, 2) + Mathf.Pow(targetZ, 2));
+
+        float square = (Mathf.Pow(asda.instance.v, 4)) - (Physics.gravity.y * (Physics.gravity.y * (Mathf.Pow(targetX, 2) + 2 * targetY * Mathf.Pow(asda.instance.v, 2))));
+
+        if(square<0)
+        {
+            Debug.Log("Not enough range");
+        }
+
+        angle = ((Mathf.Pow(asda.instance.v, 2)) - (Mathf.Sqrt(square) / (Physics.gravity.y * targetX)));
+
+        float finalAngle = Mathf.Tan(angle * Mathf.Deg2Rad);
+
+        float Vz = Mathf.Sqrt(Physics.gravity.y *(Mathf.Pow(distance,2)) / (2.0f * (targetY - (distance * finalAngle))));
+        float Vy = finalAngle * Vz;
 
         Vector3 localVelocity = new Vector3(0f, Vy, Vz);
         Vector3 globalVelocity = transform.TransformDirection(localVelocity);
 
-        rb.velocity = releaseVector*asda.instance.v;
+        // launch the object by setting its initial velocity and flipping its state
+        rb.velocity = globalVelocity;
     }
 
     private void OnCollisionEnter(Collision collision)
