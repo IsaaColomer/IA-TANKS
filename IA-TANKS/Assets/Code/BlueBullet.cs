@@ -7,7 +7,7 @@ public class BlueBullet : MonoBehaviour
     private float angle;
     [SerializeField] private float time;
     private Rigidbody rb;
-    private Vector2 velocity = new Vector2(0.0f, 0.0f);
+    private float velocity;
     private Transform redTank;
     private Vector2 updateVector;
     private float arrel;
@@ -17,16 +17,7 @@ public class BlueBullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         redTank = GameObject.FindGameObjectWithTag("Red").transform;
-        arrel = (Mathf.Sqrt((Mathf.Pow(velocity.magnitude, 4) - (Physics.gravity.y * ((Physics.gravity.y * Mathf.Pow(BlueTankBullet.instace.enemy.transform.position.z, 2)) + (2 * BlueTankBullet.instace.enemy.transform.position.y * Mathf.Pow(velocity.magnitude, 2)))))));
-        if (arrel < 0)
-        {
-            arrel = -arrel;
-            angle = Mathf.Atan((Mathf.Pow(velocity.magnitude, 2) + arrel) / (Physics.gravity.y * BlueTankBullet.instace.enemy.transform.position.z));
-        }
-        else
-        {
-            angle = Mathf.Atan((Mathf.Pow(velocity.magnitude, 2) + arrel) / (Physics.gravity.y * BlueTankBullet.instace.enemy.transform.position.z));
-        }
+
         time = 0;
         transform.LookAt(BlueTankBullet.instace.enemy.transform.position);
         Launch();
@@ -42,12 +33,22 @@ public class BlueBullet : MonoBehaviour
     {
         Vector3 projectileXZPos = new Vector3(BlueTankBullet.instace.spawnPositionBlue.transform.position.x, 0.0f, BlueTankBullet.instace.spawnPositionBlue.transform.position.z);
         targetXZPos = new Vector3(redTank.position.x, 0.0f, redTank.position.z);
-
+        velocity = 50f;
+        arrel = (Mathf.Sqrt((Mathf.Pow(velocity, 4) - (Physics.gravity.y * ((Physics.gravity.y * Mathf.Pow(redTank.position.z, 2)) + (2 * redTank.position.y * Mathf.Pow(velocity, 2)))))));
+        if (arrel < 0)
+        {
+            arrel = -arrel;
+            angle = Mathf.Atan((Mathf.Pow(velocity, 2) + arrel) / (Physics.gravity.y * redTank.position.z));
+        }
+        else
+        {
+            angle = Mathf.Atan((Mathf.Pow(velocity, 2) + arrel) / (Physics.gravity.y * redTank.position.z));
+        }
         float R = Vector3.Distance(projectileXZPos, targetXZPos);
         float G = Physics.gravity.y;
         
-        float tanAlpha = Mathf.Tan(angle * Mathf.Deg2Rad);
-        float H = BlueTankBullet.instace.enemy.transform.position.y - BlueTankBullet.instace.spawnPositionBlue.transform.position.y;
+        float tanAlpha = Mathf.Tan(angle * Mathf.Rad2Deg);
+        float H = redTank.position.y - BlueTankBullet.instace.spawnPositionBlue.transform.position.y;
 
         float Vz = Mathf.Sqrt(G * R * R / (2.0f * (H - (R * tanAlpha))));
         float Vy = tanAlpha * Vz;
