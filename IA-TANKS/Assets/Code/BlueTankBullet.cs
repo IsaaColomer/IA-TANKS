@@ -8,20 +8,14 @@ public class BlueTankBullet : MonoBehaviour
     public static BlueTankBullet instace;
     public GameObject enemy;
     public GameObject spawnPositionBlue;
-    public GameObject bulletPrefab;
-    public float time;
     public GameObject bulletHolder;
     public void Start()
     {
         instace = this;
         spawnPositionBlue = GameObject.FindGameObjectWithTag("BlueFirePoint");
-        time = 0;
     }
     public void Update()
     {
-        if (time < 2)
-        {
-            time += Time.deltaTime;
-        }
+
     }
 }

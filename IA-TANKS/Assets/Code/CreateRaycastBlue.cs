@@ -2,33 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateRaycast : MonoBehaviour
+public class CreateRaycastBlue : MonoBehaviour
 {
-    public static CreateRaycast instance;
     public GameObject firePoint;
+    public GameObject bullet;
     private LineRenderer lr;
     public float range;
     public int blueTotalBullets;
-    public int redTotalBullets;
-    public float blueTime;
-    public float redTime;
     public bool blueCanShoot;
-    public bool redCanShoot;
     public List<GameObject> blueBulletsInScene = null;
+    public float time;
+    public float fq;
     // Start is called before the first frame update
     void Start()
     {
-        instance = this;
         lr = gameObject.GetComponent<LineRenderer>();
-        blueTotalBullets = 3;
-        redTotalBullets = 3;
         blueCanShoot = false;
-        redCanShoot = false;
+        for(int i = 0; i<  blueTotalBullets; i++)
+        {
+            blueBulletsInScene.Add(bullet);
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        time += Time.deltaTime;
         RaycastHit hit;
         if(Physics.Raycast(firePoint.transform.position, firePoint.transform.forward, out hit, range))
         {
@@ -43,27 +43,27 @@ public class CreateRaycast : MonoBehaviour
             {
                 blueCanShoot = false;
             }
-            if(hit.transform.tag == "Blue")
-            {
-                lr.SetPosition(0, firePoint.transform.position);
-                lr.SetPosition(1, hit.transform.position);
-
-                Instantiate(RedTankSpawnBullets.instace.bulletPrefab, RedTankSpawnBullets.instace.spawnPositionRed.transform.position, Quaternion.identity, RedTankSpawnBullets.instace.bulletHolder.transform);
-            }
-
-            if(blueCanShoot&&blueTime<=0)
+            if(blueCanShoot)
             {
                 BlueShoot();
             }
+        }
+        if(blueBulletsInScene.Count == 0)
+        {
+            Debug.Log("Blue Must Reload");
         }
     }
 
     void BlueShoot()
     {
-        if(blueBulletsInScene.Count != blueTotalBullets)
-        {
-            blueBulletsInScene.Add(Instantiate(BlueTankBullet.instace.bulletPrefab, BlueTankBullet.instace.spawnPositionBlue.transform.position, Quaternion.identity, BlueTankBullet.instace.bulletHolder.transform));
-        }
-        
+     for (int i = 0; i <= blueTotalBullets; i++)
+     {
+            if (time >= fq)
+            {
+                time = 0f;
+                Instantiate(blueBulletsInScene[i], BlueTankBullet.instace.spawnPositionBlue.transform.position, Quaternion.identity, BlueTankBullet.instace.bulletHolder.transform);
+                blueBulletsInScene.RemoveAt(i);
+            }
     }
+   }
 }
