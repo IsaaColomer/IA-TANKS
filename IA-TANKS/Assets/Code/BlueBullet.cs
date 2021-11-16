@@ -45,7 +45,7 @@ public class BlueBullet : MonoBehaviour
 
         float R = Vector3.Distance(projectileXZPos, targetXZPos);
         float G = Physics.gravity.y;
-        angle = 45;
+        
         float tanAlpha = Mathf.Tan(angle * Mathf.Deg2Rad);
         float H = BlueTankBullet.instace.enemy.transform.position.y - BlueTankBullet.instace.spawnPositionBlue.transform.position.y;
 
