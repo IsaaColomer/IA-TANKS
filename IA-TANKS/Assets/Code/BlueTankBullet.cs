@@ -23,10 +23,5 @@ public class BlueTankBullet : MonoBehaviour
         {
             time += Time.deltaTime;
         }
-        if (time > 2)
-        {
-            Instantiate(bulletPrefab, spawnPositionBlue.transform.position, Quaternion.identity, bulletHolder.transform);
-            time = 0;
-        }
     }
 }
