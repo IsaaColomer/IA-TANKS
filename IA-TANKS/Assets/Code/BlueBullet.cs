@@ -57,9 +57,4 @@ public class BlueBullet : MonoBehaviour
 
         rb.velocity = globalVelocity;
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if()
-    }
 }
