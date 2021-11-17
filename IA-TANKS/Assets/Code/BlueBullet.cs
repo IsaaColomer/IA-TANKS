@@ -44,23 +44,33 @@ public class BlueBullet : MonoBehaviour
         if (square < 0)
         {
             Debug.Log("Not enough range");
+            square = -square;
         }
 
-        angle = ((Mathf.Pow(asda.instance.v, 2)) - (Mathf.Sqrt(square) / (Physics.gravity.y * targetX)));
+        angle = ((Mathf.Pow(asda.instance.v, 2)) + (Mathf.Sqrt(square) / (Physics.gravity.y * targetX)));
+
 
         Debug.Log(angle);
+        float finalAngle = (angle * Mathf.Rad2Deg);
+        float speed = (distance * Mathf.Sqrt(Physics.gravity.y) * Mathf.Sqrt(1 / Mathf.Sin(finalAngle))) / Mathf.Sqrt(2 * distance * Mathf.Cos(finalAngle) + 2 * transform.position.y * Mathf.Sin(finalAngle));
+        //if (finalAngle * Mathf.Rad2Deg <= 45)
+        //{
+        //    float Vz = Mathf.Sqrt(Physics.gravity.y * (Mathf.Pow(distance, 2)) / (2.0f * (targetY - (distance * finalAngle))));
+        //    float Vy = finalAngle * Vz;
 
-        float finalAngle = (angle * Mathf.Deg2Rad);
+        //    //float Vz = velocity * Mathf.Sin();
 
-        float Vz = Mathf.Sqrt(Physics.gravity.y * (Mathf.Pow(distance, 2)) / (2.0f * (targetY - (distance * finalAngle))));
-        float Vy = finalAngle * Vz;
+        //    Vector3 localVelocity = new Vector3(0f, Vy, Vz);
+        //    Vector3 globalVelocity = transform.TransformDirection(localVelocity);
 
-        //float Vz = velocity * Mathf.Sin();
+        //    // launch the object by setting its initial velocity and flipping its state
+        //    rb.velocity = globalVelocity;
+        //}
+        //else
+        //{
+        //    Debug.Log("Angle is too big! (>45)");
+        //}
 
-        Vector3 localVelocity = new Vector3(0f, Vy, Vz);
-        Vector3 globalVelocity = transform.TransformDirection(localVelocity);
-
-        // launch the object by setting its initial velocity and flipping its state
-        rb.velocity = globalVelocity;
+        rb.velocity = speed*transform.forward;
     }
 }
