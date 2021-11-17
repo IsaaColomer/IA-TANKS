@@ -18,7 +18,7 @@ public class RedBulletCode : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
         blueTank = GameObject.FindGameObjectWithTag("Blue").transform;
-        velocity = 50f;
+        velocity = 10f;
         time = 0;
         transform.LookAt(blueTank.transform.position);
         Launch();
