@@ -49,7 +49,6 @@ public class CreateRaycastRed : MonoBehaviour
                     lr.SetPosition(0, firePoint.transform.position);
                     lr.SetPosition(1, hit.transform.position);
                     redCanShoot = true;
-
                 }
                 else
                 {
