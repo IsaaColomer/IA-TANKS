@@ -4,17 +4,31 @@ using UnityEngine;
 using UnityEngine.AI;
 public class RedTankMovement : MonoBehaviour
 {
+    public static RedTankMovement instance;
     private NavMeshAgent agent;
+    [SerializeField] private GameObject redReloadPos;
+    [SerializeField] public float time;
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         agent = gameObject.GetComponent<NavMeshAgent>();
+        redReloadPos = GameObject.FindGameObjectWithTag("RedReloadPoint");
+        time = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Wander();
+        if(!CreateRaycastRed.instance.mustReload)
+        {
+            Wander();
+        }
+        else
+        {
+            agent.destination = redReloadPos.transform.position;
+        }
+
     }
     void Wander()
     {
@@ -41,5 +55,20 @@ public class RedTankMovement : MonoBehaviour
             agent.destination = -worldTarget;
         }
 
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("RedReloadPos")&&CreateRaycastRed.instance.mustReload)
+        {
+            
+            if(time > 2)
+            {
+                CreateRaycastRed.instance.reloaded = true;
+            }
+            else
+            {
+                time += Time.deltaTime;
+            }
+        }
     }
 }
