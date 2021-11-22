@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CreateRaycastBlue : MonoBehaviour
 {
+    public static CreateRaycastBlue instance;
     public GameObject firePoint;
     public GameObject bullet;
     private LineRenderer lr;
@@ -15,9 +16,12 @@ public class CreateRaycastBlue : MonoBehaviour
     public float fq;
     [SerializeField] private GameObject fp;
     [SerializeField] private GameObject holder;
+    public bool mustReload;
+    public bool reloaded;
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         lr = gameObject.GetComponent<LineRenderer>();
         blueCanShoot = false;
         for(int i = 0; i<  blueTotalBullets; i++)
@@ -26,6 +30,8 @@ public class CreateRaycastBlue : MonoBehaviour
         }
         fp = GameObject.FindGameObjectWithTag("BlueFirePoint");
         holder = GameObject.FindGameObjectWithTag("Hold");
+        mustReload = false;
+        reloaded = false;
     }
 
     // Update is called once per frame
@@ -54,19 +60,30 @@ public class CreateRaycastBlue : MonoBehaviour
         if(blueBulletsInScene.Count == 0)
         {
             Debug.Log("Blue Must Reload");
+            mustReload = true;
+        }
+        if (reloaded)
+        {
+            for (int i = 0; i < blueTotalBullets; i++)
+            {
+                blueBulletsInScene.Add(bullet);
+            }
+            reloaded = false;
+            mustReload = false;
+            BlueTankMovement.instance.time = 0;
         }
     }
 
     void BlueShoot()
     {
      for (int i = 0; i <= blueTotalBullets; i++)
-     {
+        {
             if (time >= fq)
             {
                 time = 0f;
                 Instantiate(blueBulletsInScene[i], fp.transform.position, Quaternion.identity, holder.transform);
                 blueBulletsInScene.RemoveAt(i);
             }
+        }
     }
-   }
 }

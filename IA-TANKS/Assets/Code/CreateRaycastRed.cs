@@ -16,7 +16,6 @@ public class CreateRaycastRed : MonoBehaviour
     public float fq;
     [SerializeField] private GameObject fp;
     [SerializeField] private GameObject holder;
-    [SerializeField] private GameObject redReloadPos;
     public bool mustReload;
     public bool reloaded;
     // Start is called before the first frame update
