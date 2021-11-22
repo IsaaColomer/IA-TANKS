@@ -13,6 +13,8 @@ public class CreateRaycastBlue : MonoBehaviour
     public List<GameObject> blueBulletsInScene = null;
     public float time;
     public float fq;
+    [SerializeField] private GameObject fp;
+    [SerializeField] private GameObject holder;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,8 @@ public class CreateRaycastBlue : MonoBehaviour
         {
             blueBulletsInScene.Add(bullet);
         }
-
+        fp = GameObject.FindGameObjectWithTag("BlueFirePoint");
+        holder = GameObject.FindGameObjectWithTag("Hold");
     }
 
     // Update is called once per frame
@@ -61,7 +64,7 @@ public class CreateRaycastBlue : MonoBehaviour
             if (time >= fq)
             {
                 time = 0f;
-                Instantiate(blueBulletsInScene[i], BlueTankBullet.instace.spawnPositionBlue.transform.position, Quaternion.identity, BlueTankBullet.instace.bulletHolder.transform);
+                Instantiate(blueBulletsInScene[i], fp.transform.position, Quaternion.identity, holder.transform);
                 blueBulletsInScene.RemoveAt(i);
             }
     }

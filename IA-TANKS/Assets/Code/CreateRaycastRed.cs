@@ -13,6 +13,8 @@ public class CreateRaycastRed : MonoBehaviour
     public List<GameObject> redBulletsInScene = null;
     public float time;
     public float fq;
+    [SerializeField] private GameObject fp;
+    [SerializeField] private GameObject holder;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,8 @@ public class CreateRaycastRed : MonoBehaviour
         {
             redBulletsInScene.Add(bullet);
         }
+        fp = GameObject.FindGameObjectWithTag("RedFirePoint");
+        holder = GameObject.FindGameObjectWithTag("Hold");
     }
 
     // Update is called once per frame
@@ -60,7 +64,7 @@ public class CreateRaycastRed : MonoBehaviour
             if (time >= fq)
             {
                 time = 0f;
-                Instantiate(redBulletsInScene[i], RedTankSpawnBullets.instace.spawnPositionRed.transform.position, Quaternion.identity, RedTankSpawnBullets.instace.bulletHolder.transform);
+                Instantiate(redBulletsInScene[i], fp.transform.position, Quaternion.identity, holder.transform);
                 redBulletsInScene.RemoveAt(i);
             }
         }
