@@ -14,6 +14,7 @@ public class BlueTankMovement : MonoBehaviour
     // reload
     [SerializeField] private GameObject blueReloadPos;
     [SerializeField] public float time;
+    [SerializeField] public float reloadTime;
     void Start()
     {
         instance = this;
@@ -38,7 +39,7 @@ public class BlueTankMovement : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("BlueReloadPos") && CreateRaycastBlue.instance.mustReload)
         {
-            if (time > 2)
+            if (time > reloadTime)
             {
                 CreateRaycastBlue.instance.reloaded = true;
             }

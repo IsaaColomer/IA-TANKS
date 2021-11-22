@@ -8,6 +8,7 @@ public class RedTankMovement : MonoBehaviour
     private NavMeshAgent agent;
     [SerializeField] private GameObject redReloadPos;
     [SerializeField] public float time;
+    [SerializeField] public float reloadTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +62,7 @@ public class RedTankMovement : MonoBehaviour
         if(other.gameObject.layer == LayerMask.NameToLayer("RedReloadPos")&&CreateRaycastRed.instance.mustReload)
         {
             
-            if(time > 2)
+            if(time > reloadTime)
             {
                 CreateRaycastRed.instance.reloaded = true;
             }
