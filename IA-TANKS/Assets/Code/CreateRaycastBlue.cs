@@ -7,7 +7,6 @@ public class CreateRaycastBlue : MonoBehaviour
     public static CreateRaycastBlue instance;
     public GameObject firePoint;
     public GameObject bullet;
-    private LineRenderer lr;
     public float range;
     public int blueTotalBullets;
     public bool blueCanShoot;
@@ -22,7 +21,6 @@ public class CreateRaycastBlue : MonoBehaviour
     void Start()
     {
         instance = this;
-        lr = gameObject.GetComponent<LineRenderer>();
         blueCanShoot = false;
         for(int i = 0; i<  blueTotalBullets; i++)
         {
@@ -43,8 +41,6 @@ public class CreateRaycastBlue : MonoBehaviour
         {
             if (hit.transform.tag == "Red")
             {
-                lr.SetPosition(0, firePoint.transform.position);
-                lr.SetPosition(1, hit.transform.position);
                 blueCanShoot = true;
                 
             }

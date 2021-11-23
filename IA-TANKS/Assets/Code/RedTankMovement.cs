@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
+using Pada1.BBCore;           // Code attributes
+using Pada1.BBCore.Tasks;     // TaskStatus
+using Pada1.BBCore.Framework; // BasePrimitiveAction
+
 public class RedTankMovement : MonoBehaviour
 {
     public static RedTankMovement instance;

@@ -75,6 +75,8 @@ public class BlueBullet : MonoBehaviour
 
         localVelocity = new Vector3(0f, Vy, Vz);
 
+        Debug.Log("Local velocity: " + localVelocity.magnitude);
+
         globalVelocity = transform.TransformDirection(localVelocity);
 
         rb.velocity = globalVelocity;

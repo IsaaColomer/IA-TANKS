@@ -76,7 +76,7 @@ public class RedBulletCode : MonoBehaviour
         localVelocity = new Vector3(0f, Vy, Vz);
 
         globalVelocity = transform.TransformDirection(localVelocity);
-
+        Debug.Log("Local velocity: " + localVelocity.magnitude);
         rb.velocity = globalVelocity;
     }
     private void OnCollisionEnter(Collision collision)
