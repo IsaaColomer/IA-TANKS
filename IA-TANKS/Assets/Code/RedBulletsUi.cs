@@ -15,6 +15,6 @@ public class RedBulletsUi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Red bullets: " + CreateRaycastRed.instance.redBulletsInScene.Count.ToString();
+        //text.text = "Red bullets: " + CreateRaycastRed.instance.redBulletsInScene.Count.ToString();
     }
 }

@@ -16,6 +16,6 @@ public class BlueBulletsUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = "Blue bullets: " + CreateRaycastBlue.instance.blueBulletsInScene.Count.ToString();
+       // text.text = "Blue bullets: " + CreateRaycastBlue.instance.blueBulletsInScene.Count.ToString();
     }
 }

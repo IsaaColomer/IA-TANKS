@@ -15,11 +15,11 @@ public class CanSeeEnemy : ConditionBase
     public float range;
     public override bool Check()
     {
-        bool ret = false;
+        bool ret = true;
         RaycastHit hit;
         if (Physics.Raycast(fp.transform.position, fp.transform.forward, out hit, range))
         {
-            if (hit.transform.tag == "Red")
+            if (hit.transform.tag == "Blue")
             {
                 ret = true;
 
