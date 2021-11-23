@@ -9,10 +9,11 @@ using Pada1.BBCore.Framework; // ConditionBase
 [Condition("MyConditions/CanISeeTheEnemy")]
 public class CanSeeEnemy : ConditionBase
 {
-    [InParam("tank")]
+    [InParam("FirePoint")]
     public GameObject fp;
     [InParam("range")]
     public float range;
+
     public override bool Check()
     {
         bool ret = true;
@@ -28,8 +29,9 @@ public class CanSeeEnemy : ConditionBase
             {
                 ret = false;
             }
+            Debug.DrawLine(fp.transform.position, hit.transform.position, Color.green);
         }
-        Debug.DrawLine(fp.transform.position, hit.transform.position, Color.green);
+
         return ret;
     }
 }

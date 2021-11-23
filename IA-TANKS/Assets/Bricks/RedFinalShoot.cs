@@ -9,6 +9,7 @@ using Pada1.BBCore.Framework; // BasePrimitiveAction
 [Action("MyActions/RedShoot")]
 public class RedFinalShoot : BasePrimitiveAction
 {
+    public static RedFinalShoot instance;
     [InParam("FirePoint")]
     public GameObject fp;
     [InParam("BulletHolder")]
@@ -19,12 +20,13 @@ public class RedFinalShoot : BasePrimitiveAction
     public float time;
     public float fq;
 
-    List<GameObject> redBulletsInScene = null;
+    public List<GameObject> redBulletsInScene = null;
 
     private int redTotalBullets;
     // Start is called before the first frame update
     public override void OnStart()
     {
+        instance = this;
         redBulletsInScene = new List<GameObject>();
         for (int i = 0; i < 5; i++)
         {
