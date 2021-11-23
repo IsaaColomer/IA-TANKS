@@ -10,16 +10,16 @@ using Pada1.BBCore.Framework; // BasePrimitiveAction
 public class RedTankMovement : MonoBehaviour
 {
     public static RedTankMovement instance;
-    private NavMeshAgent agent;
-    [SerializeField] private GameObject redReloadPos;
+    //private NavMeshAgent agent;
+    //[SerializeField] private GameObject redReloadPos;
     [SerializeField] public float time;
-    [SerializeField] public float reloadTime;
+    //[SerializeField] public float reloadTime;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
-        agent = gameObject.GetComponent<NavMeshAgent>();
-        redReloadPos = GameObject.FindGameObjectWithTag("RedReloadPoint");
+        //agent = gameObject.GetComponent<NavMeshAgent>();
+        //redReloadPos = GameObject.FindGameObjectWithTag("RedReloadPoint");
         time = 0;
     }
 
@@ -68,9 +68,8 @@ public class RedTankMovement : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("RedReloadPos")&&CreateRaycastRed.instance.mustReload)
-        {
-            
-            if(time > reloadTime)
+        {            
+            if(time > RedReload.instance.Reloadtime)
             {
                 CreateRaycastRed.instance.reloaded = true;
             }

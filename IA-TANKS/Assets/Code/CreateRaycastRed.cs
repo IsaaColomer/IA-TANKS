@@ -62,11 +62,13 @@ public class CreateRaycastRed : MonoBehaviour
         //}
         if (RedFinalShoot.instance.redBulletsInScene.Count == 0)
         {
+            
             Debug.Log("Red Must Reload");
             mustReload = true;
         }
         if(reloaded)
         {
+            RedReload.instance.readyToGo = false;
             for (int i = 0; i < RedFinalShoot.instance.redTotalBullets; i++)
             {
                 RedFinalShoot.instance.redBulletsInScene.Add(RedFinalShoot.instance.bullet);

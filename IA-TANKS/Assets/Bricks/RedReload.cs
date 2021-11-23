@@ -16,6 +16,10 @@ public class RedReload : BasePrimitiveAction
 
     [SerializeField] private GameObject redReloadPos;
     public bool readyToGo;
+
+    [InParam("ReloadTime")]
+    public float Reloadtime;
+    public float time;
     public static RedReload instance;
     // Start is called before the first frame update
     public override void OnStart()

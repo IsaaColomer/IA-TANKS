@@ -20,17 +20,22 @@ public class RedFinalShoot : BasePrimitiveAction
     public float fq;
 
     public List<GameObject> redBulletsInScene = null;
-
-    // Start is called before the first frame update
-    public override void OnStart()
+    void Start()
     {
-        instance = this;
-        redTotalBullets = 5;
-        redBulletsInScene = new List<GameObject>();
         for (int i = 0; i < 5; i++)
         {
             redBulletsInScene.Add(bullet);
         }
+        Debug.Log("asd");
+    }
+    // Start is called before the first frame update
+    public override void OnStart()
+    {
+
+        instance = this;
+        redTotalBullets = 5;
+        redBulletsInScene = new List<GameObject>();
+        Start();
         fq = 2f;
     }
     public bool Update()
@@ -55,7 +60,6 @@ public class RedFinalShoot : BasePrimitiveAction
     }
     public override TaskStatus OnUpdate()
     {
-
         if (!Update())
         {
             return TaskStatus.FAILED;
