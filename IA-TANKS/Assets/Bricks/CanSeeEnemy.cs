@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-using Pada1.BBCore;           // Code attributes
-using Pada1.BBCore.Framework; // ConditionBase
-
-[Condition("MyConditions/CanISeeTheEnemy")]
-public class CanSeeEnemy : ConditionBase
+public class CanSeeEnemy : MonoBehaviour
 {
-    [InParam("FirePoint")]
-    public GameObject fp;
-    [InParam("range")]
-    public float range;
-
-    public override bool Check()
+    public static CanSeeEnemy instance;
+    private float range;
+    private GameObject fp;
+    public void Start()
     {
-        bool ret = true;
+        instance = this;
+        range = 200f;
+        fp = GameObject.FindGameObjectWithTag("RedFirePoint");
+    }
+    public void Update()
+    {
+        
+    }
+    public bool Check()
+    {
+        bool ret = false;
         RaycastHit hit;
         if (Physics.Raycast(fp.transform.position, fp.transform.forward, out hit, range))
         {

@@ -37,8 +37,13 @@ public class RedFinalShoot : BasePrimitiveAction
 
     public override TaskStatus OnUpdate()
     {
+
         time += Time.deltaTime;
-        RedShoot();
+        if(CanSeeEnemy.instance.Check() && CheckRedEmptyMagazine.instance.Check())
+        {
+            RedShoot();
+        }
+
         return TaskStatus.RUNNING;
     }
 

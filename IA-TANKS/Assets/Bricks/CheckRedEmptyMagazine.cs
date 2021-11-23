@@ -2,13 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Pada1.BBCore;           // Code attributes
-using Pada1.BBCore.Framework; // BasePrimitiveAction
-
-[Condition("MyConditions/RedCheckEmpty")]
-public class CheckRedEmptyMagazine : ConditionBase
+public class CheckRedEmptyMagazine : MonoBehaviour
 {
-    public override bool Check()
+    public static CheckRedEmptyMagazine instance;
+    public void Start()
+    {
+        instance = this;
+    }
+    public void Update()
+    {
+        Check();
+    }
+    public bool Check()
     {
         bool ret = true;
         if(RedFinalShoot.instance.redBulletsInScene.Count == 0)
