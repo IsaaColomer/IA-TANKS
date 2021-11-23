@@ -16,16 +16,16 @@ public class RedFinalShoot : BasePrimitiveAction
     public GameObject holder;
     [InParam("RedBulletPrefab")]
     public GameObject bullet;
-
+    public int redTotalBullets;
     public float fq;
 
     public List<GameObject> redBulletsInScene = null;
 
-    private int redTotalBullets;
     // Start is called before the first frame update
     public override void OnStart()
     {
         instance = this;
+        redTotalBullets = 5;
         redBulletsInScene = new List<GameObject>();
         for (int i = 0; i < 5; i++)
         {
