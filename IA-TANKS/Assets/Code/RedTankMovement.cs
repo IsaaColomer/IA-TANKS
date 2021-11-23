@@ -24,17 +24,20 @@ public class RedTankMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    bool Update()
     {
+        bool ret = true;
         if(!CreateRaycastRed.instance.mustReload)
         {
             Wander();
+            ret = false;
         }
         else
         {
             agent.destination = redReloadPos.transform.position;
+            ret = true;
         }
-
+        return ret;
     }
     void Wander()
     {

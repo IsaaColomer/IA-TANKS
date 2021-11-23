@@ -15,7 +15,7 @@ public class CanSeeEnemy : MonoBehaviour
     }
     public void Update()
     {
-        
+        Check();
     }
     public bool Check()
     {
@@ -26,13 +26,14 @@ public class CanSeeEnemy : MonoBehaviour
             if (hit.transform.tag == "Blue")
             {
                 ret = true;
-
+                Debug.DrawLine(fp.transform.position, hit.transform.position, Color.red);
             }
             else
             {
                 ret = false;
+                Debug.DrawLine(fp.transform.position, hit.transform.position, Color.green);
             }
-            Debug.DrawLine(fp.transform.position, hit.transform.position, Color.green);
+            
         }
 
         return ret;

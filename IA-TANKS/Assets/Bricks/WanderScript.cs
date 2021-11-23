@@ -15,12 +15,15 @@ public class WanderScript : BasePrimitiveAction
     public GameObject rt;
     public override TaskStatus OnUpdate()
     {
-        if(CheckRedEmptyMagazine.instance.Check())
+        if(!CheckRedEmptyMagazine.instance.Check())
         {
             Wander();
+            return TaskStatus.FAILED;
         }
-
-        return TaskStatus.RUNNING;
+        else
+        {
+            return TaskStatus.COMPLETED;
+        }
     }
     void Wander()
     {

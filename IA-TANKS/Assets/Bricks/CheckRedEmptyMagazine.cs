@@ -15,10 +15,10 @@ public class CheckRedEmptyMagazine : MonoBehaviour
     }
     public bool Check()
     {
-        bool ret = true;
+        bool ret = false;
         if(RedFinalShoot.instance.redBulletsInScene.Count == 0)
         {
-            return false;
+            return true;
         }            
 
         return ret;

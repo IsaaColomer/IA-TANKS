@@ -17,7 +17,6 @@ public class RedFinalShoot : BasePrimitiveAction
     [InParam("RedBulletPrefab")]
     public GameObject bullet;
 
-    public float time;
     public float fq;
 
     public List<GameObject> redBulletsInScene = null;
@@ -32,29 +31,49 @@ public class RedFinalShoot : BasePrimitiveAction
         {
             redBulletsInScene.Add(bullet);
         }
-        fq = 3f;
+        fq = 2f;
     }
+    public bool Update()
+    {
+        bool ret = false;
+        if (CheckRedEmptyMagazine.instance.Check())
+        {
+            ret = true;
+        }
+        else
+        {
+            Debug.Log("aaa");
+            if (CanSeeEnemy.instance.Check())
+            {
+                RedShoot();
+                Debug.Log("bbb");
+            }
+            ret = false;
+        }
 
+        return ret;
+    }
     public override TaskStatus OnUpdate()
     {
 
-        time += Time.deltaTime;
-        if(CanSeeEnemy.instance.Check() && CheckRedEmptyMagazine.instance.Check())
+        if (!Update())
         {
-            RedShoot();
+            return TaskStatus.FAILED;
+        }
+        else
+        {
+            return TaskStatus.COMPLETED;
         }
 
-        return TaskStatus.RUNNING;
     }
-
     void RedShoot()
     {
         for (int i = 0; i < 5; i++)
         {
-            if (time >= fq)
+            if (TimeDelta.instance.time >= fq)
             {
-                time = 0f;
-                
+                TimeDelta.instance.time = 0f;
+                Debug.Log("a");
                 GameObject.Instantiate(redBulletsInScene[i], fp.transform.position, Quaternion.identity, holder.transform);
                 redBulletsInScene.RemoveAt(i);
             }
