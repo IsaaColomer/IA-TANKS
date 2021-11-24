@@ -15,6 +15,7 @@ public class BlueReload : BasePrimitiveAction
     [InParam("BlueReloadPos")]
     [SerializeField] public Transform blueReloadPos;
     public bool readyToGo;
+
     [InParam("ReloadTime")]
     public float Reloadtime;
     public float time;

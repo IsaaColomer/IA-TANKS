@@ -6,9 +6,10 @@ public class TimeDelta : MonoBehaviour
 {
     public static TimeDelta instance;
     public float time;
+    public float timeBlue;
     public GameObject redbullet;
     public GameObject blueBullet;
-    public GameObject[] waypoints;
+    public GameObject[] waypoints2;
     [SerializeField] private float bullets;
     [SerializeField] private float bluebullets;
     public List<GameObject> redBulletsInScene = null;
@@ -36,12 +37,14 @@ public class TimeDelta : MonoBehaviour
         AddBullets();
         AddBlueBullets();
         time = 0;
+        timeBlue = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
+        timeBlue += Time.deltaTime;
         bullets = redBulletsInScene.Count;
         bluebullets = blueBulletsInScene.Count;
     }

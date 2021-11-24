@@ -20,7 +20,7 @@ public class PatrolScript : BasePrimitiveAction
     {
         for (int i = 0; i<waypoints.Length; i++)
         {
-            waypoints[i] = GameObject.Find("Time").GetComponent<TimeDelta>().waypoints[i];
+            waypoints[i] = GameObject.Find("Time").GetComponent<TimeDelta>().waypoints2[i];
         }
     }
     public override TaskStatus OnUpdate()

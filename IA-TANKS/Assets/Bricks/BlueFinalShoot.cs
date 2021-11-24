@@ -33,9 +33,9 @@ public class BlueFinalShoot : BasePrimitiveAction
     {
         for (int i = 0; i < 5; i++)
         {
-            if (TimeDelta.instance.time >= fq)
+            if (TimeDelta.instance.timeBlue >= fq)
             {
-                TimeDelta.instance.time = 0f;
+                TimeDelta.instance.timeBlue = 0f;
                 GameObject.Instantiate(GameObject.Find("Time").GetComponent<TimeDelta>().blueBulletsInScene[i], fp.transform.position, Quaternion.identity, holder.transform);
                 GameObject.Find("Time").GetComponent<TimeDelta>().blueBulletsInScene.RemoveAt(i);
             }
