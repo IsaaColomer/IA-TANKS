@@ -46,44 +46,31 @@ public class BlueBullet : MonoBehaviour
         float targetX = (blueTank2.x - transform.position.x);
         float targetZ = (blueTank2.z - transform.position.z);
         float targetY = (blueTank2.y - transform.position.y);
-
         Vector3 projectileXZPos = new Vector3(firePoint.transform.position.x, 0.0f, firePoint.transform.position.z);
-        Vector3 targetXZPos = new Vector3(blueTank2.x, 0.0f, blueTank2.z);
-
+        Vector2 targetXZPos = new Vector2(targetX, targetZ);
         float distance = Vector3.Distance(blueTank2, transform.position);
 
         //float xAng = Mathf.Sqrt(Mathf.Pow(targetX, 2) + Mathf.Pow(targetZ, 2));
 
-        float square = Mathf.Abs(Mathf.Pow(velocity, 4) - (Physics.gravity.y * (Physics.gravity.y * (Mathf.Pow(Mathf.Abs(targetXZPos.magnitude), 2)) + (2 * Mathf.Abs(targetY) * Mathf.Pow(velocity, 2)))));
+        float square = Mathf.Abs(Mathf.Pow(velocity, 4) - (Physics.gravity.y * (Physics.gravity.y * (Mathf.Pow(Mathf.Abs(targetXZPos.magnitude), 2)) + (2 * targetY * Mathf.Pow(velocity, 2)))));
 
         angle = (Mathf.Pow(velocity, 2) + Mathf.Sqrt(square)) / (Physics.gravity.y * Mathf.Abs(targetXZPos.magnitude));
 
-        Debug.Log(angle);
+        //Debug.Log(angle);
 
-        float finalAngle = (Mathf.Atan(Mathf.Abs(angle)));
-        Debug.Log(finalAngle * Mathf.Rad2Deg);
-
-
-
-        float R = Vector3.Distance(projectileXZPos, targetXZPos);
-        float G = Physics.gravity.y;
-        float tanAlpha = Mathf.Tan(Mathf.Abs(finalAngle) * Mathf.Rad2Deg);
-        float H = blueTank2.y - firePoint.position.y;
+        float finalAngle = Mathf.Atan(Mathf.Abs(angle));
+        //Debug.Log(finalAngle*Mathf.Rad2Deg);
 
         // calculate the local space components of the velocity 
         // required to land the projectile on the target object 
-        //float Vz = Mathf.Sqrt(G * R * R / (2.0f * (H - R * tanAlpha)));
-        //float Vy = tanAlpha * Vz;
-        float Vz = velocity * Mathf.Cos(finalAngle);
-        float Vy = velocity * Mathf.Sin(finalAngle);
+        float Vz = velocity * Mathf.Sin(finalAngle);
+        float Vy = velocity * Mathf.Cos(finalAngle);
 
         localVelocity = new Vector3(0f, Vy, Vz);
 
-        Debug.Log("Local velocity: " + localVelocity.magnitude);
-
-        globalVelocity = transform.TransformDirection(localVelocity);
-
-        rb.velocity = globalVelocity;
+        localVelocity = transform.TransformDirection(localVelocity);
+        //Debug.Log("Local velocity: " + localVelocity.magnitude);
+        rb.AddForce(localVelocity, ForceMode.Impulse);
     }
     private void OnCollisionEnter(Collision collision)
     {
