@@ -14,6 +14,7 @@ public class TimeDelta : MonoBehaviour
     [SerializeField] private float bluebullets;
     public List<GameObject> redBulletsInScene = null;
     public List<GameObject> blueBulletsInScene = null;
+    public float wanderTime = 0;
     public void AddBullets()
     {
         for (int i = 0; i < 5; i++)
@@ -45,6 +46,7 @@ public class TimeDelta : MonoBehaviour
     {
         time += Time.deltaTime;
         timeBlue += Time.deltaTime;
+        wanderTime += Time.deltaTime;
         bullets = redBulletsInScene.Count;
         bluebullets = blueBulletsInScene.Count;
     }

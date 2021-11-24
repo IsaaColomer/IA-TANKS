@@ -13,6 +13,13 @@ public class WanderScript : BasePrimitiveAction
     public NavMeshAgent agent;
     [InParam("TankWander")]
     public GameObject rt;
+
+    //public override void OnStart()
+    //{
+    //    instance = this;
+    //    readyToGo = false;
+    //    redReloadPos = GameObject.FindGameObjectWithTag("RedReloadPoint").transform;
+    //}
     public override TaskStatus OnUpdate()
     {
             Wander();
@@ -36,11 +43,31 @@ public class WanderScript : BasePrimitiveAction
         NavMeshHit hit;
         if (NavMesh.SamplePosition(worldTarget, out hit, 1.0f, NavMesh.GetAreaFromName("Not Walkable")))
         {
-            agent.destination = worldTarget;
+            if(DoWander())
+            {
+                Debug.Log("True");
+                agent.destination = worldTarget;
+                GameObject.Find("Time").GetComponent<TimeDelta>().wanderTime = 0;
+            }
         }
         else
         {
-            agent.destination = -worldTarget;
+            if (DoWander())
+            {
+                Debug.Log("False");
+                agent.destination = -worldTarget;
+                GameObject.Find("Time").GetComponent<TimeDelta>().wanderTime = 0;
+            }
         }
+    }
+    bool DoWander()
+    {
+        bool ret = false;
+        if(GameObject.Find("Time").GetComponent<TimeDelta>().wanderTime > 2f)
+        {
+            ret = true;
+        }
+
+        return ret;
     }
 }
