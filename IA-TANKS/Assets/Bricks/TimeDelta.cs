@@ -8,6 +8,7 @@ public class TimeDelta : MonoBehaviour
     public float time;
     public float timeBlue;
     public GameObject redbullet;
+    public GameObject local;
     public GameObject blueBullet;
     public GameObject[] waypoints2;
     [SerializeField] private float bullets;
