@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Collections;   
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -19,18 +19,13 @@ public class RedFinalShoot : BasePrimitiveAction
     public int redTotalBullets;
     public float fq;
 
-
-
     // Start is called before the first frame update
     public override void OnStart()
     {
         instance = this;
         redTotalBullets = 5;
-        TimeDelta.instance.redBulletsInScene = new List<GameObject>();
-        for (int i = 0; i < 5; i++)
-        {
-            TimeDelta.instance.redBulletsInScene.Add(bullet);
-        }
+
+
         Debug.Log("Doing start!");
         fq = 2f;
     }
@@ -66,9 +61,9 @@ public class RedFinalShoot : BasePrimitiveAction
             if (TimeDelta.instance.time >= fq)
             {
                 TimeDelta.instance.time = 0f;
-                Debug.Log("a");
-                GameObject.Instantiate(TimeDelta.instance.redBulletsInScene[i], fp.transform.position, Quaternion.identity, holder.transform);
-                TimeDelta.instance.redBulletsInScene.RemoveAt(i);
+                //Debug.Log("a");
+                GameObject.Instantiate(GameObject.Find("Time").GetComponent<TimeDelta>().redBulletsInScene[i], fp.transform.position, Quaternion.identity, holder.transform);
+                GameObject.Find("Time").GetComponent<TimeDelta>().redBulletsInScene.RemoveAt(i);
             }
         }
     }

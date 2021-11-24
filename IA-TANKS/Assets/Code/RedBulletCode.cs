@@ -56,10 +56,10 @@ public class RedBulletCode : MonoBehaviour
 
         angle = (Mathf.Pow(velocity, 2) + Mathf.Sqrt(square)) / (Physics.gravity.y * Mathf.Abs(targetXZPos.magnitude));
 
-        Debug.Log(angle);
+        //Debug.Log(angle);
 
         float finalAngle = Mathf.Atan(Mathf.Abs(angle));
-        Debug.Log(finalAngle*Mathf.Rad2Deg);
+        //Debug.Log(finalAngle*Mathf.Rad2Deg);
 
         // calculate the local space components of the velocity 
         // required to land the projectile on the target object 
@@ -69,7 +69,7 @@ public class RedBulletCode : MonoBehaviour
         localVelocity = new Vector3(0f, Vy, Vz);
 
         localVelocity = transform.TransformDirection(localVelocity);
-        Debug.Log("Local velocity: " + localVelocity.magnitude);
+        //Debug.Log("Local velocity: " + localVelocity.magnitude);
         rb.AddForce(localVelocity, ForceMode.Impulse);
     }
     private void OnCollisionEnter(Collision collision)

@@ -13,8 +13,8 @@ public class RedReload : BasePrimitiveAction
     public NavMeshAgent agent;
     [InParam("TankWander")]
     public GameObject rt;
-
-    [SerializeField] private GameObject redReloadPos;
+    [InParam("ReloadPos")]
+    [SerializeField] public Transform redReloadPos;
     public bool readyToGo;
 
     [InParam("ReloadTime")]
@@ -26,7 +26,7 @@ public class RedReload : BasePrimitiveAction
     {
         instance = this;
         readyToGo = false;
-        redReloadPos = GameObject.FindGameObjectWithTag("RedReloadPoint");
+        redReloadPos = GameObject.FindGameObjectWithTag("RedReloadPoint").transform;
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class RedReload : BasePrimitiveAction
     {
         if (!readyToGo && CreateRaycastRed.instance.mustReload)
         {
-            agent.destination = redReloadPos.transform.position;
+            agent.destination = redReloadPos.position;
             return TaskStatus.FAILED;
         }
         else

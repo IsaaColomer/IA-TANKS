@@ -6,12 +6,22 @@ public class TimeDelta : MonoBehaviour
 {
     public static TimeDelta instance;
     public float time;
+    public GameObject redbullet;
     [SerializeField] private float bullets;
     public List<GameObject> redBulletsInScene = null;
+    public void AddBullets()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            redBulletsInScene.Add(redbullet);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+        redBulletsInScene = new List<GameObject>();
+        AddBullets();
         time = 0;
     }
 
@@ -21,4 +31,6 @@ public class TimeDelta : MonoBehaviour
         time += Time.deltaTime;
         bullets = redBulletsInScene.Count;
     }
+
+
 }

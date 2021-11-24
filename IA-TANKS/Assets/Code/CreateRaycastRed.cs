@@ -63,7 +63,7 @@ public class CreateRaycastRed : MonoBehaviour
         if (TimeDelta.instance.redBulletsInScene.Count == 0)
         {
             
-            Debug.Log("Red Must Reload");
+            //Debug.Log("Red Must Reload");
             mustReload = true;
         }
         if(reloaded)
