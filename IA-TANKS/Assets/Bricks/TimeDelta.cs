@@ -14,6 +14,8 @@ public class TimeDelta : MonoBehaviour
     [SerializeField] private float bluebullets;
     public List<GameObject> redBulletsInScene = null;
     public List<GameObject> blueBulletsInScene = null;
+
+    public GameObject[] avoid = new GameObject[24];
     public float wanderTime = 0;
     public void AddBullets()
     {

@@ -41,33 +41,18 @@ public class WanderScript : BasePrimitiveAction
 
         Vector3 result = Vector3.zero;
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(worldTarget, out hit, 1.0f, NavMesh.GetAreaFromName("Not Walkable")))
+        for(int i = 0; i < GameObject.Find("Time").GetComponent<TimeDelta>().avoid.Length; i++)
         {
-            if(DoWander())
+            if(!GameObject.Find("Time").GetComponent<TimeDelta>().avoid[i].GetComponent<BoxCollider>().bounds.Contains(localTarget))
             {
                 Debug.Log("True");
                 agent.destination = worldTarget;
-                GameObject.Find("Time").GetComponent<TimeDelta>().wanderTime = 0;
             }
-        }
-        else
-        {
-            if (DoWander())
+            else
             {
                 Debug.Log("False");
                 agent.destination = -worldTarget;
-                GameObject.Find("Time").GetComponent<TimeDelta>().wanderTime = 0;
             }
         }
-    }
-    bool DoWander()
-    {
-        bool ret = false;
-        if(GameObject.Find("Time").GetComponent<TimeDelta>().wanderTime > 2f)
-        {
-            ret = true;
-        }
-
-        return ret;
     }
 }
