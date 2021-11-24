@@ -31,7 +31,6 @@ public class RedFinalShoot : BasePrimitiveAction
     // Start is called before the first frame update
     public override void OnStart()
     {
-
         instance = this;
         redTotalBullets = 5;
         redBulletsInScene = new List<GameObject>();
