@@ -19,55 +19,45 @@ public class RedFinalShoot : BasePrimitiveAction
     public int redTotalBullets;
     public float fq;
 
-    public List<GameObject> redBulletsInScene = null;
-    void Start()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            redBulletsInScene.Add(bullet);
-        }
-        Debug.Log("asd");
-    }
+
+
     // Start is called before the first frame update
     public override void OnStart()
     {
         instance = this;
         redTotalBullets = 5;
-        redBulletsInScene = new List<GameObject>();
-        Start();
+        TimeDelta.instance.redBulletsInScene = new List<GameObject>();
+        for (int i = 0; i < 5; i++)
+        {
+            TimeDelta.instance.redBulletsInScene.Add(bullet);
+        }
+        Debug.Log("Doing start!");
         fq = 2f;
     }
-    public bool Update()
-    {
-        bool ret = false;
-        if (CheckRedEmptyMagazine.instance.Check())
-        {
-            ret = true;
-        }
-        else
-        {
-            Debug.Log("aaa");
-            if (CanSeeEnemy.instance.Check())
-            {
-                RedShoot();
-                Debug.Log("bbb");
-            }
-            ret = false;
-        }
+    //public bool Update()
+    //{
+    //    bool ret = false;
+    //    if (CheckRedEmptyMagazine.instance.Check())
+    //    {
+    //        ret = true;
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("aaa");
+    //        if (CanSeeEnemy.instance.Check())
+    //        {
+                
+    //            Debug.Log("bbb");
+    //        }
+    //        ret = false;
+    //    }
 
-        return ret;
-    }
+    //    return ret;
+    //}
     public override TaskStatus OnUpdate()
     {
-        if (!Update())
-        {
-            return TaskStatus.FAILED;
-        }
-        else
-        {
-            return TaskStatus.COMPLETED;
-        }
-
+        RedShoot();
+        return TaskStatus.RUNNING;
     }
     void RedShoot()
     {
@@ -77,8 +67,8 @@ public class RedFinalShoot : BasePrimitiveAction
             {
                 TimeDelta.instance.time = 0f;
                 Debug.Log("a");
-                GameObject.Instantiate(redBulletsInScene[i], fp.transform.position, Quaternion.identity, holder.transform);
-                redBulletsInScene.RemoveAt(i);
+                GameObject.Instantiate(TimeDelta.instance.redBulletsInScene[i], fp.transform.position, Quaternion.identity, holder.transform);
+                TimeDelta.instance.redBulletsInScene.RemoveAt(i);
             }
         }
     }

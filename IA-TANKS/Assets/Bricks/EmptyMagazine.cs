@@ -13,7 +13,7 @@ public class EmptyMagazine : ConditionBase
     public override bool Check()
     {
         bool ret = true;
-        if (RedFinalShoot.instance.redBulletsInScene.Count == 0)
+        if (TimeDelta.instance.redBulletsInScene.Count == 0)
         {
             return false;
         }

@@ -60,7 +60,7 @@ public class CreateRaycastRed : MonoBehaviour
         //        }
         //    }
         //}
-        if (RedFinalShoot.instance.redBulletsInScene.Count == 0)
+        if (TimeDelta.instance.redBulletsInScene.Count == 0)
         {
             
             Debug.Log("Red Must Reload");
@@ -71,7 +71,7 @@ public class CreateRaycastRed : MonoBehaviour
             RedReload.instance.readyToGo = false;
             for (int i = 0; i < RedFinalShoot.instance.redTotalBullets; i++)
             {
-                RedFinalShoot.instance.redBulletsInScene.Add(RedFinalShoot.instance.bullet);
+                TimeDelta.instance.redBulletsInScene.Add(RedFinalShoot.instance.bullet);
             }
             RedReload.instance.readyToGo = true;
             reloaded = false;

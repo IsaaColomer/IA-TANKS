@@ -1,23 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CanSeeEnemy : MonoBehaviour
+using Pada1.BBCore;
+using Pada1.BBCore.Framework; // ConditionBase
+[Condition("canSeeEnemy")]
+public class CanSeeEnemy : ConditionBase
 {
     public static CanSeeEnemy instance;
-    private float range;
-    private GameObject fp;
+    [InParam("range")]
+    public float range;
+    [InParam("FirePoint")]
+    public GameObject fp;
     public void Start()
     {
         instance = this;
-        range = 200f;
-        fp = GameObject.FindGameObjectWithTag("RedFirePoint");
     }
-    public void Update()
-    {
-        Check();
-    }
-    public bool Check()
+    public override bool Check()
     {
         bool ret = false;
         RaycastHit hit;
@@ -25,6 +23,7 @@ public class CanSeeEnemy : MonoBehaviour
         {
             if (hit.transform.tag == "Blue")
             {
+                Debug.Log("Seen");
                 ret = true;
                 Debug.DrawLine(fp.transform.position, hit.transform.position, Color.red);
             }
@@ -33,7 +32,7 @@ public class CanSeeEnemy : MonoBehaviour
                 ret = false;
                 Debug.DrawLine(fp.transform.position, hit.transform.position, Color.green);
             }
-            
+
         }
 
         return ret;

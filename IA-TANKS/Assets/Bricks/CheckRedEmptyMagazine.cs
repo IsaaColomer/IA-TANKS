@@ -1,25 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pada1.BBCore;
+using Pada1.BBCore.Framework; // ConditionBase
 
-public class CheckRedEmptyMagazine : MonoBehaviour
+[Condition("isMagEmpty")]
+public class CheckRedEmptyMagazine : ConditionBase
 {
     public static CheckRedEmptyMagazine instance;
     public void Start()
     {
         instance = this;
     }
-    public void Update()
-    {
-        Check();
-    }
-    public bool Check()
+    public override bool Check()
     {
         bool ret = false;
-        if(RedFinalShoot.instance.redBulletsInScene.Count == 0)
+        if (TimeDelta.instance.redBulletsInScene.Count == 0)
         {
             return true;
-        }            
+        }
 
         return ret;
     }
