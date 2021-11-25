@@ -16,6 +16,12 @@ public class WanderScript : BasePrimitiveAction
     [InParam("ShootPoint")]
     public GameObject sp;
     bool doWander = true;
+    public override void OnStart()
+    {
+        GameObject.Find("Red").GetComponent<UIelementsHighlight>().m = true;
+        GameObject.Find("Red").GetComponent<UIelementsHighlight>().r = false;
+        GameObject.Find("Red").GetComponent<UIelementsHighlight>().s = false;
+    }
     public override TaskStatus OnUpdate()
     {
         if(doWander)

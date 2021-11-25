@@ -25,6 +25,9 @@ public class RedFinalShoot : BasePrimitiveAction
         instance = this;
         redTotalBullets = 5;
         fq = 2f;
+        GameObject.Find("Red").GetComponent<UIelementsHighlight>().m = false;
+        GameObject.Find("Red").GetComponent<UIelementsHighlight>().r = false;
+        GameObject.Find("Red").GetComponent<UIelementsHighlight>().s = true;
     }
     public override TaskStatus OnUpdate()
     {

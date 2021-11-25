@@ -27,6 +27,9 @@ public class RedReload : BasePrimitiveAction
         instance = this;
         readyToGo = false;
         redReloadPos = GameObject.FindGameObjectWithTag("RedReloadPoint").transform;
+        GameObject.Find("Red").GetComponent<UIelementsHighlight>().m = false;
+        GameObject.Find("Red").GetComponent<UIelementsHighlight>().r = true;
+        GameObject.Find("Red").GetComponent<UIelementsHighlight>().s = false;
     }
 
     // Update is called once per frame
