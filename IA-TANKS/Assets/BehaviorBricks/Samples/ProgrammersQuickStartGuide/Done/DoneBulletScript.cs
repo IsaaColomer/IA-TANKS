@@ -5,7 +5,6 @@
 /// </summary>
 public class DoneBulletScript : MonoBehaviour
 {
-
     // Use this for initialization
     /// <summary>
     /// Initialize the component to be destroy the GameObject in 2 seconds.
@@ -14,5 +13,4 @@ public class DoneBulletScript : MonoBehaviour
 	{
 		Destroy(gameObject, 2);
 	} // Start
-
 }

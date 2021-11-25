@@ -23,7 +23,6 @@ public class CanSeeEnemy : ConditionBase
     }
     public override bool Check()
     {
-        bool ret = false;
         float dx = b.transform.position.x - r.transform.position.x;
         float dz = b.transform.position.z - r.transform.position.z;
         Vector2 distance = new Vector2(dx, dz);
@@ -35,7 +34,5 @@ public class CanSeeEnemy : ConditionBase
         {
             return false;
         }
-
-        return ret;
     }
 }

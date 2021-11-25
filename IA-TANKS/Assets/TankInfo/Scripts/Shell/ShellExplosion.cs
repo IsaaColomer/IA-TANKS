@@ -49,7 +49,6 @@ public class ShellExplosion : MonoBehaviour
             // Deal this damage to the tank.
             targetHealth.TakeDamage(damage);
         }
-        Debug.Log("Particles");
         // Unparent the particles from the shell.
         m_ExplosionParticles.transform.parent = null;
 
@@ -61,7 +60,7 @@ public class ShellExplosion : MonoBehaviour
 
         // Once the particles have finished, destroy the gameobject they are on.
         ParticleSystem.MainModule mainModule = m_ExplosionParticles.main;
-        //Destroy(m_ExplosionParticles.gameObject, mainModule.duration);
+        Destroy(m_ExplosionParticles.gameObject, mainModule.duration);
 
         // Destroy the shell.
         Destroy(gameObject);
