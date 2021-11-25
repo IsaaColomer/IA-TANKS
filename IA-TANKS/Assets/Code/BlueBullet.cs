@@ -72,12 +72,12 @@ public class BlueBullet : MonoBehaviour
         //Debug.Log("Local velocity: " + localVelocity.magnitude);
         rb.AddForce(localVelocity, ForceMode.Impulse);
     }
-    public void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Red")
-        {
-            GameObject.Find("Time").GetComponent<TimeDelta>().redLife -= 10;
-            Debug.Log(GameObject.Find("Time").GetComponent<TimeDelta>().redLife);
-        }
-    }
+    //public void OnCollisionEnter(Collision collision)
+    //{
+    //    if(collision.gameObject.tag == "Red")
+    //    {
+    //        GameObject.Find("Time").GetComponent<TimeDelta>().redLife -= 10;
+    //        Debug.Log(GameObject.Find("Time").GetComponent<TimeDelta>().redLife);
+    //    }
+    //}
 }

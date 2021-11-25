@@ -72,12 +72,12 @@ public class RedBulletCode : MonoBehaviour
         //Debug.Log("Local velocity: " + localVelocity.magnitude);
         rb.AddForce(localVelocity, ForceMode.Impulse);
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Blue")
-        {
-            GameObject.Find("Time").GetComponent<TimeDelta>().blueLife -= 10;
-            Debug.Log(GameObject.Find("Time").GetComponent<TimeDelta>().blueLife);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Blue")
+    //    {
+    //        GameObject.Find("Time").GetComponent<TimeDelta>().blueLife -= 10;
+    //        Debug.Log(GameObject.Find("Time").GetComponent<TimeDelta>().blueLife);
+    //    }
+    //}
 }
