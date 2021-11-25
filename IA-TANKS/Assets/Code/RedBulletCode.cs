@@ -74,6 +74,10 @@ public class RedBulletCode : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //if()
+        if (collision.gameObject.tag == "Blue")
+        {
+            GameObject.Find("Time").GetComponent<TimeDelta>().blueLife -= 10;
+            Debug.Log(GameObject.Find("Time").GetComponent<TimeDelta>().blueLife);
+        }
     }
 }

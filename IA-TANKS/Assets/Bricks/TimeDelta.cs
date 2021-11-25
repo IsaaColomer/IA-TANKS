@@ -7,6 +7,8 @@ public class TimeDelta : MonoBehaviour
     public static TimeDelta instance;
     public float time;
     public float timeBlue;
+    public float redLife;
+    public float blueLife;
     public GameObject redbullet;
     public GameObject local;
     public GameObject blueBullet;

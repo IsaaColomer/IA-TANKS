@@ -64,7 +64,7 @@ public class WanderScript : BasePrimitiveAction
     void TRay()
     {
         RaycastHit hit;
-        if(Physics.Raycast(sp.transform.position, sp.transform.forward, out hit, 3))
+        if(Physics.Raycast(sp.transform.position, sp.transform.forward, out hit, 2))
         {
             if(hit.transform.tag != "Blue" || hit.transform.tag != "BlueFirePoint")
             {
