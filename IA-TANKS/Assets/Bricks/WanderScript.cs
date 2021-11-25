@@ -46,8 +46,6 @@ public class WanderScript : BasePrimitiveAction
         GameObject.Find("Time").GetComponent<TimeDelta>().local.transform.position = worldTarget;
         for (int i = 0; i < GameObject.Find("Time").GetComponent<TimeDelta>().avoid.Length; i++)
         {
-            if(DoWander())
-            {
                 if (!GameObject.Find("Time").GetComponent<TimeDelta>().avoid[i].GetComponent<BoxCollider>().bounds.Contains(localTarget))
                 {
                     agent.destination = worldTarget;
@@ -58,7 +56,6 @@ public class WanderScript : BasePrimitiveAction
                     agent.destination = -worldTarget;
                     GameObject.Find("Time").GetComponent<TimeDelta>().timeBlue = 0;
                 }
-            }
         }
     }
     void TRay()
@@ -82,7 +79,6 @@ public class WanderScript : BasePrimitiveAction
         {
             doWander = true;
         }
-
     }
     bool DoWander()
     {
