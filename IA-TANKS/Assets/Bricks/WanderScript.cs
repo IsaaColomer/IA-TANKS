@@ -72,14 +72,12 @@ public class WanderScript : BasePrimitiveAction
             if(hit.transform.tag != "Blue" || hit.transform.tag != "BlueFirePoint")
             {
                 doWander = false;
-                Debug.Log("Hitted");
-                agent.destination = new Vector3(-agent.transform.forward.x, 0f, -agent.transform.forward.z) * 3;
+                agent.destination = new Vector3(-agent.transform.forward.x, 0f, -agent.transform.forward.z) * 7;
             }
             else
             {
                 doWander = true;
             }
-            Debug.DrawLine(sp.transform.position, hit.transform.position, Color.green);
         }
         else
         {
