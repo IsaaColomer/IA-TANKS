@@ -31,17 +31,17 @@ public class BlueBullet : MonoBehaviour
         startpos = transform.position;
         transform.position = firePoint.position;
         Launch();
+        transform.LookAt(blueTank);
     }
 
     // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
-
-        Debug.DrawLine(firePoint.transform.position, blueTank2, Color.blue);
     }
     void Launch()
     {
+        velocity = 10;
         float targetX = (blueTank2.x - transform.position.x);
         float targetZ = (blueTank2.z - transform.position.z);
         float targetY = (blueTank2.y - transform.position.y);
@@ -60,7 +60,7 @@ public class BlueBullet : MonoBehaviour
 
         localVelocity = new Vector3(0f, Vy, Vz);
         localVelocity = transform.TransformDirection(localVelocity);
-        transform.LookAt(localVelocity);
+
         rb.AddForce(localVelocity, ForceMode.Impulse);
     }
 }
