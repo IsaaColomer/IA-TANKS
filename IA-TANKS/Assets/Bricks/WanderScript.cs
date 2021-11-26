@@ -9,6 +9,7 @@ using Pada1.BBCore.Framework; // BasePrimitiveAction
 [Action("MyActions/WanderAction")]
 public class WanderScript : BasePrimitiveAction
 {
+    public static WanderScript instance;
     [InParam("NavMesh")]
     public NavMeshAgent agent;
     [InParam("TankWander")]
@@ -16,15 +17,20 @@ public class WanderScript : BasePrimitiveAction
     [InParam("ShootPoint")]
     public GameObject sp;
     bool doWander = true;
+    public Vector3 worldTarget;
     public override void OnStart()
     {
+        instance = this;
+        GameObject.Find("Debug").GetComponent<DebugInfo>().wt.transform.position = worldTarget;
+        GameObject.Find("Debug").GetComponent<DebugInfo>().wt.SetActive(false);
         GameObject.Find("Red").GetComponent<UIelementsHighlight>().m = true;
         GameObject.Find("Red").GetComponent<UIelementsHighlight>().r = false;
         GameObject.Find("Red").GetComponent<UIelementsHighlight>().s = false;
     }
     public override TaskStatus OnUpdate()
     {
-        if(doWander)
+        GameObject.Find("Debug").GetComponent<DebugInfo>().candebug = true;
+        if (doWander)
         {
             Wander();
         }
@@ -43,10 +49,10 @@ public class WanderScript : BasePrimitiveAction
         localTarget.Normalize();
         localTarget *= radius;
         localTarget += new Vector3(0, 0, offset);
-        Vector3 worldTarget =
+        worldTarget =
             rt.transform.TransformPoint(localTarget);
         worldTarget.y = 0f;
-
+        GameObject.Find("Debug").GetComponent<DebugInfo>().wt.transform.position = worldTarget;
         Vector3 result = Vector3.zero;
         NavMeshHit hit;
         GameObject.Find("Time").GetComponent<TimeDelta>().local.transform.position = worldTarget;

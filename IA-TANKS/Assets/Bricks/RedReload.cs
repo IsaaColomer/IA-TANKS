@@ -35,6 +35,7 @@ public class RedReload : BasePrimitiveAction
     // Update is called once per frame
     public override TaskStatus OnUpdate()
     {
+        GameObject.Find("Debug").GetComponent<DebugInfo>().candebug = false;
         if (!readyToGo && CreateRaycastRed.instance.mustReload)
         {
             agent.destination = redReloadPos.position;

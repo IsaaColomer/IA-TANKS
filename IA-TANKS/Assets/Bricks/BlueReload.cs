@@ -25,6 +25,7 @@ public class BlueReload : BasePrimitiveAction
         instance = this;
         readyToGo = false;
         blueReloadPos = GameObject.FindGameObjectWithTag("BlueReloadPoint").transform;
+
         GameObject.Find("Blue").GetComponent<UIelementsHighlight>().m = false;
         GameObject.Find("Blue").GetComponent<UIelementsHighlight>().r = true;
         GameObject.Find("Blue").GetComponent<UIelementsHighlight>().s = false;
@@ -32,6 +33,7 @@ public class BlueReload : BasePrimitiveAction
 
     public override TaskStatus OnUpdate()
     {
+        GameObject.Find("Debug").GetComponent<DebugInfo>().candebug = false;
         if (!readyToGo && CreateRaycastBlue.instance.mustReload)
         {
             agent.destination = blueReloadPos.position;

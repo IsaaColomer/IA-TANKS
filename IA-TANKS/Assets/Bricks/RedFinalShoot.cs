@@ -22,6 +22,7 @@ public class RedFinalShoot : BasePrimitiveAction
     // Start is called before the first frame update
     public override void OnStart()
     {
+
         instance = this;
         redTotalBullets = 5;
         fq = 2f;
@@ -31,6 +32,7 @@ public class RedFinalShoot : BasePrimitiveAction
     }
     public override TaskStatus OnUpdate()
     {
+        GameObject.Find("Debug").GetComponent<DebugInfo>().candebug = false;
         RedShoot();
         return TaskStatus.RUNNING;
     }
