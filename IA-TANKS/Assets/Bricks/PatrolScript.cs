@@ -23,7 +23,6 @@ public class PatrolScript : BasePrimitiveAction
         for (int i = 0; i<waypoints.Length; i++)
         {
             waypoints[i] = GameObject.Find("Time").GetComponent<TimeDelta>().waypoints2[i];
-            GameObject.Find("Debug").GetComponent<DebugInfo>().pp[i].SetActive(false);
         }
         GameObject.Find("Debug").GetComponent<DebugInfo>().candebug = true;
         GameObject.Find("Blue").GetComponent<UIelementsHighlight>().m = true;
@@ -33,7 +32,7 @@ public class PatrolScript : BasePrimitiveAction
     }
     public override TaskStatus OnUpdate()
     {
-
+        GameObject.Find("Debug").GetComponent<DebugInfo>().candebug = true;
         if (!agent.pathPending && agent.remainingDistance < 0.5f) Patrol();
         return TaskStatus.RUNNING;
     }
