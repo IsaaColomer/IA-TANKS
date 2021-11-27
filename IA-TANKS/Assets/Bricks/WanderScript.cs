@@ -53,8 +53,6 @@ public class WanderScript : BasePrimitiveAction
             rt.transform.TransformPoint(localTarget);
         worldTarget.y = 0f;
         GameObject.Find("Debug").GetComponent<DebugInfo>().wt.transform.position = worldTarget;
-        Vector3 result = Vector3.zero;
-        NavMeshHit hit;
         GameObject.Find("Time").GetComponent<TimeDelta>().local.transform.position = worldTarget;
         for (int i = 0; i < GameObject.Find("Time").GetComponent<TimeDelta>().avoid.Length; i++)
         {
@@ -89,17 +87,6 @@ public class WanderScript : BasePrimitiveAction
         {
             doWander = true;
         }
-    }
-    bool DoWander()
-    {
-        bool ret = false;
-
-        if (GameObject.Find("Time").GetComponent<TimeDelta>().timeBlue >0.65f)
-        {
-            ret = true;
-        }
-
-        return ret;
     }
 }
 

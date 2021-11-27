@@ -16,7 +16,6 @@ public class PatrolScript : BasePrimitiveAction
     public GameObject rt;
     public GameObject[] waypoints = new GameObject[12];
     public int patrolWP = 0;
-    // Start is called before the first frame update
     public override void OnStart()
     {
         instace = this;
